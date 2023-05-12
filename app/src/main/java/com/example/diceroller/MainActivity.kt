@@ -2,7 +2,7 @@ package com.example.diceroller
 
 import android.os.Bundle
 import android.widget.Button
-import android.widget.TextView
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
@@ -15,32 +15,35 @@ class MainActivity : AppCompatActivity() {
         rollButton.setOnClickListener {
             rollDice()
         }
+
+        rollDice()
     }
 
     /**
-     * Joga os dados e atualize a tela com o resultado
+     * Jogue os dados e atualize a tela com o resultado.
      */
     private fun rollDice() {
-        // Cria um novo objeto Dado com 6 lados e joga
+        // Crie um novo objeto Dice com 6 lados e rola os dados
         val dice = Dice(6)
         val diceRoll = dice.roll()
 
-        /**
-         * acha o textView pelo id e atribui em a variavel resultTextView do tipo TextView, pega o
-         * resultado do dado em inteiro e transforma para String, apos isso atribui para o atributo
-         * text do objeto resultTextView
-         */
+        // Encontra o ImageView no layout pelo id e atribui a varivael do tipo ImageView diceImage
+        val diceImage: ImageView = findViewById(R.id.imageView)
 
-        val resultTextView: TextView = findViewById(R.id.textView)
-        resultTextView.text = diceRoll.toString()
+        //Determine qual ID de recurso desenhável usar com base na rolagem de dados
+        val drawableResource = when (diceRoll){
+            1 -> R.drawable.dice_1
+            2 -> R.drawable.dice_2
+            3 -> R.drawable.dice_3
+            4 -> R.drawable.dice_4
+            5 -> R.drawable.dice_5
+            else -> R.drawable.dice_6
+        }
+        //Atualize o ImageView com a imagem do dado
+        diceImage.setImageResource(drawableResource)
 
-        val dado = Dice(12)
-        val jogarDado= dado.roll()
-
-        val resultadoTextView: TextView = findViewById(R.id.textView2)
-        resultadoTextView.text = jogarDado.toString()
-
-
+        //// Atualiza a descrição do conteúdo
+        diceImage.contentDescription = diceRoll.toString()
     }
 }
 
