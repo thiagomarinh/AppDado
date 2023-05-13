@@ -27,13 +27,8 @@ class MainActivity : AppCompatActivity() {
         val dice = Dice(6)
         val diceRoll = dice.roll()
 
-        val dado = Dice(6)
-        val jogarDado = dado.roll()
-
         // Encontra o ImageView no layout pelo id e atribui a varivael do tipo ImageView diceImage
         val diceImage: ImageView = findViewById(R.id.imageView)
-
-        val imagemDado: ImageView = findViewById(R.id.imageView2)
 
         //Determine qual ID de recurso desenhável usar com base na rolagem de dados
         val drawableResource = when (diceRoll){
@@ -47,20 +42,9 @@ class MainActivity : AppCompatActivity() {
         //Atualize o ImageView com a imagem do dado
         diceImage.setImageResource(drawableResource)
 
-        val desenharDado = when (jogarDado){
-            1 -> R.drawable.dice_1
-            2 -> R.drawable.dice_2
-            3 -> R.drawable.dice_3
-            4 -> R.drawable.dice_4
-            5 -> R.drawable.dice_5
-            else -> R.drawable.dice_6
-        }
-        imagemDado.setImageResource(desenharDado)
-
         //// Atualiza a descrição do conteúdo
         diceImage.contentDescription = diceRoll.toString()
 
-        imagemDado.contentDescription = jogarDado.toString()
     }
 }
 
